@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Group;
 use App\Entity\Project;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,14 +17,27 @@ class StatusController extends AbstractController
     public function index(ManagerRegistry $doctrine, Request $request): Response
     {
         $projects = $doctrine->getRepository(Project::class)->findAll();
-        if($request->isMethod("POST")){
-            if($request->get("title")==""){
-                $this->addFlash('error', "Some of the fields are empty please check");
-            }
-        }
+
         if(!$projects){
             return $this->render('create-project.html.twig');
         }
+
+        $entityManager = $doctrine->getManager();
+        if($request->isMethod("POST")){
+            $request = $request->request->all();
+            $projectTitle = $request['title'];
+            $projectGroupNumber = $request['groupNumber'];
+            $projectGroups = $request['groupStudentCount'];
+            $project = new Project($projectTitle,$projectGroupNumber);
+            foreach ($projectGroups as $group){
+                $groupEntity = new Group(intval($group));
+                $entityManager->persist($groupEntity);
+                $project->addGroup($groupEntity);
+            }
+            $entityManager->persist($project);
+            $entityManager->flush();
+        }
+
         return $this->render('status.html.twig');
     }
 

@@ -6,10 +6,9 @@ class Groups{
     private groupNumber: HTMLInputElement;
     private submitBtn: HTMLButtonElement;
 
-    private rawGroupHTML = "<div class=\"group d-flex mt-3\">\n" +
-        "                    <div class=\"mr-3\">\n" +
-        "                        <label>Group name</label>\n" +
-        "                        <input name=\"groupName[]\" class=\"form-control\" placeholder=\"Enter group name\">\n" +
+    private rawGroupHTML = "<div class=\"group mt-3 d-flex\">\n" +
+        "                    <div class=\"mr-3 d-flex align-items-center\">\n" +
+        "                        Group 1\n" +
         "                    </div>\n" +
         "                    <div>\n" +
         "                        <label for=\"numberOfStudents\">Max. number of students</label>\n" +
@@ -62,21 +61,17 @@ class Groups{
             alert("Project number of groups cannot be empty");
             return;
         }
-        let groupName:NodeListOf<HTMLInputElement> = document.querySelectorAll("input[name='groupName[]']");
         let groupStudentCount:NodeListOf<HTMLInputElement>  = document.querySelectorAll("input[name='groupStudentCount[]']");
-        for(let i = 0;i<groupName.length;i++){
+        for(let i = 0;i<groupStudentCount.length;i++){
             if(groupStudentCount.item(i).value ===""){
                 ev.preventDefault();
                 alert("Group student count cannot be empty");
-            } else if(groupName.item(i).value === ""){
-                ev.preventDefault();
-                alert("Group name cannot be empty");
             }
         }
     }
 
     private checkValue(input:HTMLInputElement): void{
-        if(parseInt(input.value)<0 || input.value ==""){
+        if(parseInt(input.value)<0 || input.value ===""){
             input.value = "1";
         }
     }
@@ -87,10 +82,11 @@ class Groups{
 
         let groupCount = groups.length;
         if(groupCount<groupNumber){
-            let diff = groupNumber - groupCount;
             for(let i=groupCount; i<groupNumber;i++){
                 this.parentDiv.insertAdjacentHTML('beforeend', this.rawGroupHTML);
-                let studentNumber: HTMLInputElement = this.parentDiv.lastElementChild.querySelector("input[name='groupStudentCount[]']");
+                let studentNumber: HTMLInputElement = this.parentDiv.lastElementChild.querySelector("[name='groupStudentCount[]']");
+                let groupTitle: HTMLDivElement = this.parentDiv.lastElementChild.querySelector("div");
+                groupTitle.innerHTML = "Group " + (i+1);
                 this.setNumberListener(studentNumber);
             }
         } else if(groupCount>groupNumber && groupNumber>0){
