@@ -2,25 +2,25 @@
 
 namespace App\Controller;
 
-use App\Entity\Group;
 use App\Entity\Project;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class StatusController extends AbstractController
+
+class MainController extends AbstractController
 {
-    #[Route('/status', name: 'status')]
+    #[Route('/', name: 'main')]
     public function index(ManagerRegistry $doctrine, Request $request): Response
     {
+        $projects = $doctrine->getRepository(Project::class)->findAll();
 
-        return $this->render('status.html.twig');
+        if(!$projects){
+            return $this->redirect('/project/create');
+        }
+
+        return $this->redirect('/status');
     }
-
-//    public function submit(){
-//        var
-//    }
 }
