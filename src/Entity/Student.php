@@ -33,6 +33,12 @@ class Student
      */
     private string $surname;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Group::class, inversedBy="students")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $project_group;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -58,6 +64,23 @@ class Student
     public function setSurname(string $surname): self
     {
         $this->surname = $surname;
+
+        return $this;
+    }
+
+    public function getFullName(): string
+    {
+        return $this->name . ' ' . $this->surname;
+    }
+
+    public function getProjectGroup(): ?Group
+    {
+        return $this->project_group;
+    }
+
+    public function setProjectGroup(?Group $project_group): self
+    {
+        $this->project_group = $project_group;
 
         return $this;
     }
