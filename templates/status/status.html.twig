@@ -1,0 +1,15 @@
+{% extends('base.html.twig') %}
+
+{% block body %}
+    <div>Project: {{ project.title }}</div>
+    <div>Number of groups: {{ project.getGroupNumber() }}</div>
+    <div>Student per group: {{ project.getStudentNumber() }}</div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

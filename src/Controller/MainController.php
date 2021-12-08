@@ -15,12 +15,11 @@ class MainController extends AbstractController
     #[Route('/', name: 'main')]
     public function index(ManagerRegistry $doctrine, Request $request): Response
     {
-        $projects = $doctrine->getRepository(Project::class)->findAll();
-
-        if(!$projects){
+        $project = $doctrine->getRepository(Project::class)->findOneBy([]);
+        if(!$project){
             return $this->redirect('/project/create');
         }
 
-        return $this->redirect('/status');
+        return $this->redirect('/status/' . $project->getId());
     }
 }

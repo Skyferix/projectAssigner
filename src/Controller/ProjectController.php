@@ -42,7 +42,7 @@ class ProjectController extends AbstractController
 
             $entityManager->persist($project);
             $entityManager->flush();
-            return $this->redirect('/status');
+            return $this->redirect('/status/' . $project->getId());
         }
 
         return $this->render('project/create.html.twig',[
