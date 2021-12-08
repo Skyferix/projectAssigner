@@ -26,19 +26,22 @@ class Project
     private string $title;
 
     /**
-     * @ORM\OneToMany(targetEntity=Group::class, mappedBy="project_id", orphanRemoval=true)
+     * @ORM\Column(type="integer")
      */
-    private $groups;
+    private int $group_number;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $group_number;
+    private int $student_number;
 
-    #[Pure] public function __construct(string $title, int $group_number)
+    /**
+     * @ORM\OneToMany(targetEntity=Group::class, mappedBy="project", orphanRemoval=true)
+     */
+    private $groups;
+
+    public function __construct()
     {
-        $this->title = $title;
-        $this->group_number = $group_number;
         $this->groups = new ArrayCollection();
     }
 
@@ -47,7 +50,7 @@ class Project
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -58,11 +61,33 @@ class Project
 
         return $this;
     }
+    public function getGroupNumber(): int
+    {
+        return $this->group_number;
+    }
+
+    public function setGroupNumber(int $group_number): self
+    {
+        $this->group_number = $group_number;
+
+        return $this;
+    }
+
+    public function getStudentNumber(): int
+    {
+        return $this->student_number;
+    }
+
+    public function setStudentNumber(int $student_number): self
+    {
+        $this->student_number = $student_number;
+
+        return $this;
+    }
 
     /**
      * @return Collection|Group[]
      */
-
     public function getGroups(): Collection
     {
         return $this->groups;
@@ -72,7 +97,7 @@ class Project
     {
         if (!$this->groups->contains($group)) {
             $this->groups[] = $group;
-            $group->setProjectId($this);
+            $group->setProject($this);
         }
 
         return $this;
@@ -82,22 +107,10 @@ class Project
     {
         if ($this->groups->removeElement($group)) {
             // set the owning side to null (unless already changed)
-            if ($group->getProjectId() === $this) {
-                $group->setProjectId(null);
+            if ($group->getProject() === $this) {
+                $group->setProject(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getGroupNumber(): ?int
-    {
-        return $this->group_number;
-    }
-
-    public function setGroupNumber(int $group_number): self
-    {
-        $this->group_number = $group_number;
 
         return $this;
     }
