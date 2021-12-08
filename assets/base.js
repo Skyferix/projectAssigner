@@ -9,6 +9,7 @@
 
 const $ = require('jquery');
 const moment = require('moment');
+require('bootstrap');
 
 global.$ = global.jQuery = $;
 

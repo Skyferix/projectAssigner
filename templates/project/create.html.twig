@@ -1,0 +1,18 @@
+{% extends('base.html.twig') %}
+
+{% block body %}
+
+    <div class="row h-100 align-items-center" >
+        <div class="col-sm d-flex justify-content-center">
+            <div style="width: 300px">
+                <h2 class="mb-3">Create project</h2>
+                {{ form(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('project-create') }}
+{% endblock %}
