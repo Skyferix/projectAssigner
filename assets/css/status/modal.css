@@ -1,0 +1,8 @@
+.modal-active {
+    display: block !important;
+    background-color: rgba(56, 56, 56,0.5);
+}
+
+#student_project_group{
+    display: block;
+}

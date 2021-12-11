@@ -14,14 +14,6 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/project', name: 'project')]
 class ProjectController extends AbstractController
 {
-    #[Route('/', name: 'project')]
-    public function index(): Response
-    {
-        return $this->render('project/index.html.twig', [
-            'controller_name' => 'ProjectController',
-        ]);
-    }
-
     #[Route('/create', name: 'create')]
     public function create(Request $request, ManagerRegistry $doctrine):Response
     {
@@ -34,7 +26,7 @@ class ProjectController extends AbstractController
             $entityManager = $doctrine->getManager();
 
             for($i = 0; $i <$project->getGroupNumber();$i++){
-                $group = new Group();
+                $group = new Group('#' . $i);
                 $entityManager->persist($group);
 
                 $project->addGroup($group);

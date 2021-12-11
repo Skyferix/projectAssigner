@@ -1,0 +1,24 @@
+
+<div id="modal" class="modal" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add student</h5>
+                <button type="button" class="close" is="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {{ form_start(form) }}
+                <div class="modal-body">
+                    <div id="UX_error" class="d-none text-danger">Student named: @var@ already exists!</div>
+                    {{ form_row(form.name) }}
+                    {{ form_row(form.surname) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" is="close" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    {{ form_row(form.submit) }}
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>

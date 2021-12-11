@@ -40,9 +40,15 @@ class Project
      */
     private $groups;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Student::class, mappedBy="project")
+     */
+    private $students;
+
     public function __construct()
     {
         $this->groups = new ArrayCollection();
+        $this->students = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -109,6 +115,43 @@ class Project
             // set the owning side to null (unless already changed)
             if ($group->getProject() === $this) {
                 $group->setProject(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Student[]
+     */
+    public function getStudents(): Collection
+    {
+        return $this->students;
+    }
+
+    public function getStudentsWithoutGroup(): Collection
+    {
+        return $this->students->filter(function (Student $student){
+            return $student->getProjectGroup() == null;
+        });
+    }
+
+    public function addStudent(Student $student): self
+    {
+        if (!$this->students->contains($student)) {
+            $this->students[] = $student;
+            $student->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStudent(Student $student): self
+    {
+        if ($this->students->removeElement($student)) {
+            // set the owning side to null (unless already changed)
+            if ($student->getProject() === $this) {
+                $student->setProject(null);
             }
         }
 

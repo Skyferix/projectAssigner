@@ -9,11 +9,11 @@
 
 const $ = require('jquery');
 const moment = require('moment');
-require('bootstrap');
 
 global.$ = global.jQuery = $;
-
-import './styles/base.css';
+require('bootstrap');
+import '../css/app.css';
+import '../css/boostrap.css';
 
 // start the Stimulus application
-import './bootstrap';
+import '../bootstrap';

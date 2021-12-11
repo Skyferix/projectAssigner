@@ -20,8 +20,8 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-    .addEntry('base', './assets/base.js')
-    .addEntry('project-create', './assets/scripts/project-create.ts')
+    .addEntry('app', './assets/combined_js/app.js')
+    .addEntry('status', './assets/combined_js/status.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
@@ -44,7 +44,7 @@ Encore
     .enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())
     // enables hashed filenames (e.g. app.abc123.css)
-    .enableVersioning(Encore.isProduction())
+    .enableVersioning()
 
     .configureBabel((config) => {
         config.plugins.push('@babel/plugin-proposal-class-properties');
