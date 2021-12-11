@@ -1,5 +1,5 @@
 
-class StudentForm{
+class CreateStudent{
     private modal: HTMLInputElement;
     private createBtn: HTMLButtonElement;
     private saveBtn:HTMLInputElement;
@@ -12,11 +12,11 @@ class StudentForm{
     }
 
     private setVariables(){
-        this.modal = document.querySelector('.modal');
+        this.modal = document.querySelector('#create-modal');
         this.createBtn = document.querySelector('button#create');
-        this.closeButtons = document.querySelectorAll("button[is='close']");
-        this.saveBtn = document.querySelector("button#student_submit");
-        this.form = document.querySelector("form[name='student']");
+        this.closeButtons = this.modal.querySelectorAll("button[is='close']");
+        this.saveBtn = this.modal.querySelector("button#student_submit");
+        this.form = this.modal.querySelector("form[name='student']");
     }
 
     private setListeners(){
@@ -40,7 +40,7 @@ class StudentForm{
         let url = window.location.href;
         let id = url.substr(url.lastIndexOf('/')+1);
         $.post({
-            url: '/status/submit/' + id,
+            url: '/student/create/' + id,
             contentType: 'application/x-www-form-urlencoded',
             data: form_data,
             success:function (data){
@@ -57,4 +57,4 @@ class StudentForm{
     }
 
 }
-let studentForm = new StudentForm();
+let createStudent = new CreateStudent();

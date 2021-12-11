@@ -30,7 +30,7 @@
                                 {% else %}
                                     <td>-</td>
                                 {% endif %}
-                                <td>delete</td>
+                                <td><button class="btn btn-outline-danger rounded-pill" is="delete" data-student="{{ student.getId() }}">delete</button></td>
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -47,23 +47,23 @@
                     <table class="table table-striped w-25 mr-5">
                         <thead class="thead-dark">
                             <tr>
-                                <th>Group {{ group.name }}</th>
+                                <th class="d-flex justify-content-center">Group {{ group.name }}</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for student in group.getStudents() %}
                                 <tr>
-                                    <td>{{ student.getFullName() }}</td>
+                                    <td class="d-flex justify-content-center">{{ student.getFullName() }}</td>
                                 </tr>
                             {% endfor %}
                             {% if group.getStudents()|length < project.getStudentNumber() %}
                                 {% for i in group.getStudents()|length+1..project.getStudentNumber() %}
                                     <tr>
                                         <td class="d-flex justify-content-center">
-                                            <select class="form-select">
+                                            <select is="studentSelect" data-group="{{ group.getId() }}">
                                                 <option>Assign student</option>
                                                 {% for stud in selectStudents %}
-                                                    <option>{{ stud.getFullName() }}</option>
+                                                    <option data-student="{{ stud.getId() }}">{{ stud.getFullName() }}</option>
                                                 {% endfor %}
                                             </select>
                                         </td>
@@ -77,6 +77,7 @@
         </div>
     </div>
     {% include 'status/student-create.html.twig' %}
+    {% include 'status/delete-question.html.twig' %}
 
 {% endblock %}
 
