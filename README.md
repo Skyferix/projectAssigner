@@ -51,7 +51,7 @@ symfony server:start
 
 ## Database
 
-Current app is setuped to work on localhost address wich can be changed is .evv file.
+Current app is setuped to work on localhost address wich can be changed is .env file.
 
 
 ## Start
