@@ -55,7 +55,7 @@ class StudentController extends AbstractController
     /**
      * @Route("/add", name="add")]
      */
-    public function add(ManagerRegistry $doctrine, Request $request): Response
+    public function add(ManagerRegistry $doctrine): Response
     {
         $groupId = $_POST['groupId'];
         $studentId = $_POST['studentId'];
@@ -81,7 +81,7 @@ class StudentController extends AbstractController
     /**
      * @Route("/delete/{id}", name="delete")]
      */
-    public function delete(int $id, ManagerRegistry $doctrine, Request $request): Response
+    public function delete(int $id, ManagerRegistry $doctrine): Response
     {
         if ($id) {
             $entityManager = $doctrine->getManager();
