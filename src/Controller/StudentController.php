@@ -86,6 +86,9 @@ class StudentController extends AbstractController
         if ($id) {
             $entityManager = $doctrine->getManager();
             $student = $doctrine->getRepository(Student::class)->find($id);
+            if(!$student){
+                return $this->json(['status' => 'error', 'cause' => 'Student does not exist']);
+            }
             $entityManager->remove($student);
             try {
                 $entityManager->flush();
