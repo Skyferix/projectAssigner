@@ -20,6 +20,9 @@ class StatusController extends AbstractController
      */
     public function index(int $id, ManagerRegistry $doctrine, Request $request): Response
     {
+        $url = $request->getRequestUri();
+        $this->refreshPage($url, 10);
+
         $project = $doctrine->getRepository(Project::class)->find($id);
 
         $student = new Student();
@@ -37,6 +40,10 @@ class StatusController extends AbstractController
             'selectStudents' => $selectStudents,
             'form' => $form->createView()
         ]);
+    }
+
+    private function refreshPage(string $url, int $interval){
+        header("Refresh: $interval; URL=$url");
     }
 
 
