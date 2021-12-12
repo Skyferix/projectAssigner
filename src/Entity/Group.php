@@ -23,7 +23,7 @@ class Group
 
     /**
      * @ORM\ManyToOne(targetEntity=Project::class, inversedBy="groups")
-     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     * @ORM\JoinColumn(nullable=false)
      */
     private ?Project $project;
 

@@ -37,13 +37,13 @@ class Student
      * @ORM\ManyToOne(targetEntity=Group::class, inversedBy="students")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $project_group;
+    private ?Group $project_group;
 
     /**
      * @ORM\ManyToOne(targetEntity=Project::class, inversedBy="students")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $project;
+    private ?Project $project;
 
     public function getId(): ?int
     {
