@@ -19,9 +19,12 @@ class ExceptionListener{
         $controller = explode('/',$request->getRequestUri());
         $controller = sizeof($controller) > 1 ? $controller[1] : null;
         $project = $this->em->getRepository(Project::class)->findOneBy([]);
-        if(!$project){
-            $event->setResponse(new RedirectResponse('/project/create'));
+        if(!$project ){
+            if($controller != 'project') {
+                $event->setResponse(new RedirectResponse('/project/create'));
+            }
         } else if($controller == 'status' || $request->isMethod('POST')||$request->isMethod('PUT')){}
+
         else{
             $event->setResponse(new RedirectResponse('/status/' . $project->getId()));
         }

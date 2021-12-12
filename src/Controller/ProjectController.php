@@ -26,7 +26,7 @@ class ProjectController extends AbstractController
             $entityManager = $doctrine->getManager();
 
             for($i = 0; $i <$project->getGroupNumber();$i++){
-                $group = new Group('#' . $i);
+                $group = new Group('#' . $i+1);
                 $entityManager->persist($group);
 
                 $project->addGroup($group);
