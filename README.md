@@ -12,6 +12,7 @@ Whole app works on MVC (Modal View Controller) principle.
 - [Database](#Database)
 - [Start](#Enter)
 - [Testing](#Testing)
+- [Refreshing](#Refreshing)
 
 
 ## Technologies
@@ -76,3 +77,11 @@ To run test run command
  ```sh
 symfony php bin/phpunit tests/StudentTest.php
 ```
+
+## Refreshing
+
+Refresh is done by simply puting header with refresh tag
+
+> **NOTE:**
+Didn't have time to make content replace with javascript.
+>
