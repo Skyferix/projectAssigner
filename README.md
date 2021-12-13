@@ -83,5 +83,5 @@ symfony php bin/phpunit tests/StudentTest.php
 Refresh is done by simply puting header with refresh tag
 
 > **NOTE:**
-Didn't have time to make content replace with javascript.
+Didn't have time to make content replace with async javascript.
 >
